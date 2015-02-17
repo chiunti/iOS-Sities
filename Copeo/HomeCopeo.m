@@ -24,4 +24,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)btnSavePressed:(id)sender {
+    
+    PFObject *testObject = [PFObject objectWithClassName:@"lugares"];
+    testObject[@"name"] = self.txtName.text;
+    testObject[@"description"] = self.txtDescription.text;
+    testObject[@"position"] = self.txtName.text;
+    [testObject saveInBackground];
+}
 @end
