@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Chiunti Soft. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "HomeCopeo.h"
 
-@interface ViewController ()
+@interface HomeCopeo ()
 
 @end
 
-@implementation ViewController
+@implementation HomeCopeo
 
 - (void)viewDidLoad {
     [super viewDidLoad];
