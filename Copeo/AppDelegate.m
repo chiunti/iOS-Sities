@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @interface AppDelegate ()
 
@@ -29,6 +30,9 @@
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // activar google maps
+    [GMSServices provideAPIKey:@"AIzaSyB15CghfN-juM9UBv7_SXMZSHC7nGZVcio"];
     return YES;
 }
 
