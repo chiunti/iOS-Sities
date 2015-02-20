@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import <iAd/iAd.h>
+#import "GAITrackedViewController.h"
 
-@interface MainTable : UIViewController<UIApplicationDelegate, ADBannerViewDelegate>
+@interface MainTable : GAITrackedViewController<UIApplicationDelegate, ADBannerViewDelegate>
 {
     ADBannerView *adView;
     BOOL bannerIsVisible;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tblMain;
+- (IBAction)btnAddPressed:(id)sender;
 
 @end

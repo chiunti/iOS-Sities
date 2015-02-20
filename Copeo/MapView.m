@@ -16,6 +16,8 @@ NSString  *strUserLocation;
 float     mlatitude;
 float     mlongitude;
 GMSMapView *mapView_;
+GMSPolyline *polyline1;
+GMSPolyline *polyline2;
 
 @interface MapView ()
 
@@ -26,6 +28,8 @@ GMSMapView *mapView_;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self cfgiAdBanner];
+    // google analytics
+    self.screenName = @"Map View";
     //[self getLugares];
     
     
@@ -41,6 +45,8 @@ GMSMapView *mapView_;
     [self.locationManager requestAlwaysAuthorization];
     
     [self.locationManager startUpdatingLocation];
+    
+
 
 }
 
@@ -49,10 +55,19 @@ GMSMapView *mapView_;
     [super viewDidAppear:animated];
     [self paintMap];
 }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"Map View";
+}
+
+- (IBAction)btnRefreshDown:(id)sender {
+    [self getLugares];
+}
 
 -(void)paintMap
 {
     //  Create a GMSCmeraPosition
+    NSLog(@"paintMap");
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:17.0696588
                                                             longitude:-96.7264306
                                                                  zoom:14];
@@ -60,7 +75,7 @@ GMSMapView *mapView_;
     mapView_.frame = CGRectMake(0, 0, self.viewMapa.frame.size.width, self.viewMapa.frame.size.height);
     mapView_.myLocationEnabled = YES;
     mapView_.delegate = self;
-    //self.viewMapa = mapView_;
+    
     
     
     // marcadores
@@ -71,12 +86,19 @@ GMSMapView *mapView_;
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position =  CLLocationCoordinate2DMake( [lugar[@"position"] latitude ], [lugar[@"position"] longitude])  ;
         marker.title = lugar[@"name"];
-        marker.snippet = lugar[@"description"];
+        marker.snippet = [lugar[@"description" ] stringByAppendingString:@"\n\nPresiona aquí para trazar la ruta"];
         marker.map = mapView_;
     }
     
+    // remove subviews
+    for (UIView *view in [self.viewMapa subviews])
+    {
+        [view removeFromSuperview];
+    }
+    
+    // add new view
     [self.viewMapa addSubview:mapView_];
-        
+    //self.viewMapa = mapView_;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,73 +124,66 @@ GMSMapView *mapView_;
 
 
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
-/**********************************************************************************************
- Localization
- **********************************************************************************************/
+//---------------------------------------------------------------------------------------------
+// Localization
+//---------------------------------------------------------------------------------------------
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     self.location = locations.lastObject;
-    NSLog( @"didUpdateLocation!");
+    //NSLog( @"didUpdateLocation!");
     CLGeocoder * geoCoder = [[CLGeocoder alloc] init];
     [geoCoder reverseGeocodeLocation:self.locationManager.location completionHandler:^(NSArray *placemarks, NSError *error)
      {
-         for (CLPlacemark *placemark in placemarks)
-         {
-             NSString *addressName = [placemark name];
-             NSString *city = [placemark locality];
-             NSString *administrativeArea = [placemark administrativeArea];
-             NSString *country  = [placemark country];
-             NSString *countryCode = [placemark ISOcountryCode];
-             //NSLog(@"name is %@ and locality is %@ and administrative area is %@ and country is %@ and country code %@", addressName, city, administrativeArea, country, countryCode);
-             strUserLocation = [[administrativeArea stringByAppendingString:@","] stringByAppendingString:countryCode];
-             //NSLog(@"gstrUserLocation = %@", strUserLocation);
-         }
+         ///
+         //for (CLPlacemark *placemark in placemarks)
+         //{
+         //    NSString *addressName = [placemark name];
+         //    NSString *city = [placemark locality];
+         //    NSString *administrativeArea = [placemark administrativeArea];
+         //    NSString *country  = [placemark country];
+         //    NSString *countryCode = [placemark ISOcountryCode];
+         //    NSLog(@"name is %@ and locality is %@ and administrative area is %@ and country is %@ and country code %@", addressName, city, administrativeArea, country, countryCode);
+         //    strUserLocation = [[administrativeArea stringByAppendingString:@","] stringByAppendingString:countryCode];
+         //    NSLog(@"gstrUserLocation = %@", strUserLocation);
+         //}
+         //
+          
          mlatitude = self.locationManager.location.coordinate.latitude;
          //[mUserDefaults setObject: [[NSNumber numberWithFloat:mlatitude] stringValue] forKey: pmstrLatitude];
          mlongitude = self.locationManager.location.coordinate.longitude;
          //[mUserDefaults setObject: [[NSNumber numberWithFloat:mlatitude] stringValue] forKey: pmstrLatitude];
-         NSLog(@"lat = %f", mlatitude);
-         NSLog(@"lon = %f", mlongitude);
+         //NSLog(@"lat = %f", mlatitude);
+         //NSLog(@"lon = %f", mlongitude);
      }];
 }
 
 - (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
 {
-    GMSMutablePath *mPath = [[GMSMutablePath alloc] init];
-    [mPath addLatitude:mlatitude longitude:mlongitude];
-    [mPath addCoordinate:marker.position];
-    GMSPolyline *mpoly = [GMSPolyline polylineWithPath:mPath];
-    mpoly.map = mapView_;
+
+    [self drawDirection:CLLocationCoordinate2DMake(mlatitude, mlongitude) and:CLLocationCoordinate2DMake(marker.position.latitude, marker.position.longitude)];
+    
 }
 
 
-/***************************************
- iAd Banner
- **************************************/
-- (void)cfgiAdBanner
+//---------------------------------------
+// iAd Banner
+//---------------------------------------
+ - (void)cfgiAdBanner
 {
     // Setup iAdView
-    adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0, /*self.view.frame.size.height*/ 20, self.view.frame.size.width, 50)];
-    /*
-    adView = [[ADBannerView alloc] initWithFrame:CGRectZero];
-    
-    //Set coordinates for adView
-    CGRect adFrame      = adView.frame;
-    //adFrame.origin.y    = self.view.frame.size.height - 50;
-    adFrame.origin.y    = 20;
-    NSLog(@"adFrame.origin.y: %f",adFrame.origin.y);
-    adView.frame        = adFrame;
-    */
+    adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0,  20, self.view.frame.size.width, 50)];
+    //
+    //adView = [[ADBannerView alloc] initWithFrame:CGRectZero];
+    //
+    ////Set coordinates for adView
+    //CGRect adFrame      = adView.frame;
+    ////adFrame.origin.y    = self.view.frame.size.height - 50;
+    //adFrame.origin.y    = 20;
+    //NSLog(@"adFrame.origin.y: %f",adFrame.origin.y);
+    //adView.frame        = adFrame;
+    //
     [adView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     
     adView.delegate = self;
@@ -222,7 +237,132 @@ GMSMapView *mapView_;
     // [video resume];
     // [audio resume];
 }
-- (IBAction)btnRefreshPressed:(id)sender {
-    [self getLugares];
+
+
+
+
+
+//--------------------------------
+// map directions
+// -------------------------------
+
+
+- (void) drawDirection:(CLLocationCoordinate2D)source and:(CLLocationCoordinate2D) dest {
+    
+    
+    //GMSPolyline *polyline = [[GMSPolyline alloc] init];
+    if (polyline1) {
+        polyline1.map = nil;
+        polyline2.map = nil;
+    }
+    polyline1 = [[GMSPolyline alloc] init];
+    polyline2 = [[GMSPolyline alloc] init];
+    
+    GMSMutablePath *path = [GMSMutablePath path];
+    
+    NSArray * points = [self calculateRoutesFrom:source to:dest];
+    
+    NSInteger numberOfSteps = points.count;
+    
+    for (NSInteger index = 0; index < numberOfSteps; index++)
+    {
+        CLLocation *location = [points objectAtIndex:index];
+        CLLocationCoordinate2D coordinate = location.coordinate;
+        [path addCoordinate:coordinate];
+    }
+    
+    polyline1.path = path;
+    polyline1.strokeColor = [UIColor redColor];
+    polyline1.strokeWidth = 4.f;
+    //polyline.map = self.mapView;
+    polyline1.map = mapView_;
+    
+    // Copy the previous polyline, change its color, and mark it as geodesic.
+    polyline2 = [polyline1 copy];
+    polyline2.strokeWidth = 2.f;
+    polyline2.strokeColor = [UIColor yellowColor];
+    polyline2.geodesic = YES;
+    //polyline.map = self.mapView;
+    polyline2.map = mapView_;
 }
+
+-(NSArray*) calculateRoutesFrom:(CLLocationCoordinate2D) f to: (CLLocationCoordinate2D) t {
+    NSString* saddr = [NSString stringWithFormat:@"%f,%f", f.latitude, f.longitude];
+    NSString* daddr = [NSString stringWithFormat:@"%f,%f", t.latitude, t.longitude];
+    
+    
+    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&sensor=false&avoid=highways&mode=driving",saddr,daddr]];
+    
+    NSError *error=nil;
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init] ;
+    
+    [request setURL:url];
+    [request setHTTPMethod:@"POST"];
+    
+    NSURLResponse *response = nil;
+    
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error: &error];
+    
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    
+    NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:[responseString dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONWritingPrettyPrinted error:nil];
+    
+    return [self decodePolyLine:[self parseResponse:dic]];
+}
+- (NSString *)parseResponse:(NSDictionary *)response {
+    NSArray *routes = [response objectForKey:@"routes"];
+    NSDictionary *route = [routes lastObject];
+    if (route) {
+        NSString *overviewPolyline = [[route objectForKey:
+                                       @"overview_polyline"] objectForKey:@"points"];
+        return overviewPolyline;
+    }
+    return @"";
+}
+-(NSMutableArray *)decodePolyLine:(NSString *)encodedStr {
+    NSMutableString *encoded = [[NSMutableString alloc]
+                                initWithCapacity:[encodedStr length]];
+    [encoded appendString:encodedStr];
+    [encoded replaceOccurrencesOfString:@"\\\\" withString:@"\\"
+                                options:NSLiteralSearch
+                                  range:NSMakeRange(0,
+                                                    [encoded length])];
+    NSInteger len = [encoded length];
+    NSInteger index = 0;
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    NSInteger lat=0;
+    NSInteger lng=0;
+    while (index < len) {
+        NSInteger b;
+        NSInteger shift = 0;
+        NSInteger result = 0;
+        do {
+            b = [encoded characterAtIndex:index++] - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+        } while (b >= 0x20);
+        NSInteger dlat = ((result & 1) ? ~(result >> 1)
+                          : (result >> 1));
+        lat += dlat;
+        shift = 0;
+        result = 0;
+        do {
+            b = [encoded characterAtIndex:index++] - 63;
+            result |= (b & 0x1f) << shift;
+            shift += 5;
+        } while (b >= 0x20);
+        NSInteger dlng = ((result & 1) ? ~(result >> 1)
+                          : (result >> 1));
+        lng += dlng;
+        NSNumber *latitude = [[NSNumber alloc] initWithFloat:lat * 1e-5];
+        NSNumber *longitude = [[NSNumber alloc] initWithFloat:lng * 1e-5];
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:
+                                [latitude floatValue] longitude:[longitude floatValue]];
+        [array addObject:location];
+    }
+    return array;
+}
+
+
 @end

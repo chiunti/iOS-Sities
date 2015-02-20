@@ -51,6 +51,10 @@
 		3C5A3AAD1A95621C00CFAB36 /* FBMissingSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5A3AAC1A95621C00CFAB36 /* FBMissingSymbols.m */; };
 		3C5A3AB01A95A27900CFAB36 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5A3AAF1A95A27900CFAB36 /* CustomTableViewCell.m */; };
 		3C5A3AB21A9670D300CFAB36 /* icon-ios7-refresh-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C5A3AB11A9670D300CFAB36 /* icon-ios7-refresh-32.png */; };
+		3C5A3ABE1A96DD1E00CFAB36 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5A3ABD1A96DD1E00CFAB36 /* libGoogleAnalyticsServices.a */; };
+		3C5A3AC01A96DF1600CFAB36 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5A3ABF1A96DF1600CFAB36 /* AdSupport.framework */; };
+		3C5A3AC21A96F37400CFAB36 /* Pushwoosh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C5A3AC11A96F37400CFAB36 /* Pushwoosh.framework */; };
+		3C5A3AC51A970CA900CFAB36 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C5A3AC41A970CA900CFAB36 /* MBProgressHUD.m */; };
 		3CB447FD1A93126A00C8AD9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB447FC1A93126A00C8AD9C /* main.m */; };
 		3CB448001A93126A00C8AD9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB447FF1A93126A00C8AD9C /* AppDelegate.m */; };
 		3CB448031A93126A00C8AD9C /* EditCopeo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB448021A93126A00C8AD9C /* EditCopeo.m */; };
@@ -121,6 +125,17 @@
 		3C5A3AAE1A95A27900CFAB36 /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		3C5A3AAF1A95A27900CFAB36 /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		3C5A3AB11A9670D300CFAB36 /* icon-ios7-refresh-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-ios7-refresh-32.png"; sourceTree = "<group>"; };
+		3C5A3AB41A96DD1E00CFAB36 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		3C5A3AB51A96DD1E00CFAB36 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		3C5A3AB91A96DD1E00CFAB36 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		3C5A3ABA1A96DD1E00CFAB36 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		3C5A3ABB1A96DD1E00CFAB36 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		3C5A3ABC1A96DD1E00CFAB36 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		3C5A3ABD1A96DD1E00CFAB36 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		3C5A3ABF1A96DF1600CFAB36 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		3C5A3AC11A96F37400CFAB36 /* Pushwoosh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pushwoosh.framework; sourceTree = "<group>"; };
+		3C5A3AC31A970CA900CFAB36 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		3C5A3AC41A970CA900CFAB36 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3CB447F71A93126A00C8AD9C /* Copeo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Copeo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CB447FB1A93126A00C8AD9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3CB447FC1A93126A00C8AD9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -141,9 +156,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C5A3AC21A96F37400CFAB36 /* Pushwoosh.framework in Frameworks */,
+				3C5A3AC01A96DF1600CFAB36 /* AdSupport.framework in Frameworks */,
 				3C5A3AAA1A9546AB00CFAB36 /* Accounts.framework in Frameworks */,
 				3C5A3AA81A95462200CFAB36 /* Twitter.framework in Frameworks */,
 				3C5A3AA61A95460600CFAB36 /* Social.framework in Frameworks */,
+				3C5A3ABE1A96DD1E00CFAB36 /* libGoogleAnalyticsServices.a in Frameworks */,
 				3C5A3A9C1A953F3000CFAB36 /* AVFoundation.framework in Frameworks */,
 				3C5A3A9D1A953F3000CFAB36 /* CoreData.framework in Frameworks */,
 				3C5A3A9E1A953F3000CFAB36 /* CoreText.framework in Frameworks */,
@@ -203,6 +221,8 @@
 		3C5A39E71A9323E500CFAB36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C5A3AC11A96F37400CFAB36 /* Pushwoosh.framework */,
+				3C5A3ABF1A96DF1600CFAB36 /* AdSupport.framework */,
 				3C5A3AA91A9546AB00CFAB36 /* Accounts.framework */,
 				3C5A3AA71A95462200CFAB36 /* Twitter.framework */,
 				3C5A3AA51A95460600CFAB36 /* Social.framework */,
@@ -248,9 +268,24 @@
 			name = images;
 			sourceTree = "<group>";
 		};
+		3C5A3AB31A96DD1E00CFAB36 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				3C5A3AB41A96DD1E00CFAB36 /* GAI.h */,
+				3C5A3AB51A96DD1E00CFAB36 /* GAIDictionaryBuilder.h */,
+				3C5A3AB91A96DD1E00CFAB36 /* GAIFields.h */,
+				3C5A3ABA1A96DD1E00CFAB36 /* GAILogger.h */,
+				3C5A3ABB1A96DD1E00CFAB36 /* GAITrackedViewController.h */,
+				3C5A3ABC1A96DD1E00CFAB36 /* GAITracker.h */,
+				3C5A3ABD1A96DD1E00CFAB36 /* libGoogleAnalyticsServices.a */,
+			);
+			path = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
 		3CB447EE1A93126A00C8AD9C = {
 			isa = PBXGroup;
 			children = (
+				3C5A3AB31A96DD1E00CFAB36 /* GoogleAnalytics */,
 				3C5A3A841A95116600CFAB36 /* images */,
 				3C5A39E71A9323E500CFAB36 /* Frameworks */,
 				3CB447F91A93126A00C8AD9C /* Copeo */,
@@ -271,6 +306,8 @@
 		3CB447F91A93126A00C8AD9C /* Copeo */ = {
 			isa = PBXGroup;
 			children = (
+				3C5A3AC31A970CA900CFAB36 /* MBProgressHUD.h */,
+				3C5A3AC41A970CA900CFAB36 /* MBProgressHUD.m */,
 				3C5A3AAB1A95621C00CFAB36 /* FBMissingSymbols.h */,
 				3C5A3AAC1A95621C00CFAB36 /* FBMissingSymbols.m */,
 				3C5A3AAE1A95A27900CFAB36 /* CustomTableViewCell.h */,
@@ -281,11 +318,11 @@
 				3CB447FF1A93126A00C8AD9C /* AppDelegate.m */,
 				3CB448011A93126A00C8AD9C /* EditCopeo.h */,
 				3CB448021A93126A00C8AD9C /* EditCopeo.m */,
-				3CB448041A93126A00C8AD9C /* Main.storyboard */,
 				3C5A3A811A9425CC00CFAB36 /* DismissSegue.h */,
 				3C5A3A821A9425CC00CFAB36 /* DismissSegue.m */,
 				3C5A3A7C1A94236800CFAB36 /* MainTable.h */,
 				3C5A3A7D1A94236800CFAB36 /* MainTable.m */,
+				3CB448041A93126A00C8AD9C /* Main.storyboard */,
 				3C5A3A791A94232D00CFAB36 /* MapView.h */,
 				3C5A3A7A1A94232D00CFAB36 /* MapView.m */,
 				3CB448071A93126A00C8AD9C /* Images.xcassets */,
@@ -433,6 +470,7 @@
 				3CB448001A93126A00C8AD9C /* AppDelegate.m in Sources */,
 				3C5A3AB01A95A27900CFAB36 /* CustomTableViewCell.m in Sources */,
 				3C5A3A8E1A9519FA00CFAB36 /* Defaults.m in Sources */,
+				3C5A3AC51A970CA900CFAB36 /* MBProgressHUD.m in Sources */,
 				3C5A3A831A9425CC00CFAB36 /* DismissSegue.m in Sources */,
 				3CB447FD1A93126A00C8AD9C /* main.m in Sources */,
 			);
@@ -567,8 +605,12 @@
 				);
 				INFOPLIST_FILE = Copeo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c236c4e7-7cdf-4f99-9a37-9897c21d7656";
 			};
 			name = Debug;
 		};
@@ -585,8 +627,12 @@
 				);
 				INFOPLIST_FILE = Copeo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleAnalytics",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "c236c4e7-7cdf-4f99-9a37-9897c21d7656";
 			};
 			name = Release;
 		};

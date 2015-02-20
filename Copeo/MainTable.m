@@ -22,6 +22,11 @@ UIRefreshControl *refreshControl;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self cfgiAdBanner];
+    self.screenName = @"Main Table";
+    [self getLugares];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getLugares) name:@"getLugares" object:nil];
+    //self.tblMain.editing = YES;
+
     // Do any additional setup after loading the view.
     
     // Initialize the refresh control.
@@ -38,6 +43,11 @@ UIRefreshControl *refreshControl;
     //                        action:@selector(getLatestLoans)
     //              forControlEvents:UIControlEventValueChanged];
     [self getLugares];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.screenName = @"Main Table";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -164,8 +174,28 @@ UIRefreshControl *refreshControl;
 //-------------------------------------------------------------------------------
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    currentState = Edit;
+    currentObject = lugares[indexPath.row];
+    [self performSegueWithIdentifier:@"ToEdit" sender:self];
 }
+- (IBAction)btnAddPressed:(id)sender {
+    currentState = Insert;
+    [self performSegueWithIdentifier:@"ToEdit" sender:self];
+}
+
+
+// llamado al darle borrar
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Remove the row from data model
+        PFObject *object = [lugares objectAtIndex:indexPath.row];
+        [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            [self getLugares];
+        }];
+    }
+}
+
 
 /***************************************
  iAd Banner

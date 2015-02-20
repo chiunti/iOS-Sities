@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface EditCopeo : UIViewController<UITextFieldDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface EditCopeo : UIViewController<UITextFieldDelegate,UIAlertViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>
+
+//Location
+@property (strong, nonatomic) CLLocation        *location;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 // Images
 @property (weak, nonatomic) IBOutlet UIImageView *imgPhoto;

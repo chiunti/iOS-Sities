@@ -19,13 +19,13 @@
                                     <navigationItem title="Lugares de copeo" id="Wjh-mq-6dO">
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fac-8h-gTf">
                                             <connections>
-                                                <segue destination="vXZ-lx-hvc" kind="modal" id="lZw-gy-OtV"/>
+                                                <action selector="btnAddPressed:" destination="JEb-8a-5ty" id="ulW-zl-xnV"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hSq-3C-tYv" userLabel="tblMain">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hSq-3C-tYv" userLabel="tblMain">
                                 <rect key="frame" x="-3" y="114" width="326" height="408"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,6 +75,7 @@
                     <tabBarItem key="tabBarItem" systemItem="mostViewed" id="4U0-RK-8DJ"/>
                     <connections>
                         <outlet property="tblMain" destination="hSq-3C-tYv" id="lzD-cb-Tqw"/>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="ToEdit" id="m5u-tA-804"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I7N-hG-vs2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -107,7 +108,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="icon-ios7-refresh-32.png"/>
                                 <connections>
-                                    <action selector="btnRefreshPressed:" destination="8ay-UL-3Fp" eventType="touchUpInside" id="DUU-ZI-NRx"/>
+                                    <action selector="btnRefreshDown:" destination="8ay-UL-3Fp" eventType="touchDown" id="J6C-Ga-2Ri"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -313,6 +314,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lNZ-xF-Tla"/>
+        <segue reference="L24-J9-cVp"/>
     </inferredMetricsTieBreakers>
 </document>

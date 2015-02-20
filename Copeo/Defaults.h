@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
 NSMutableArray *lugares;
 
@@ -17,6 +18,7 @@ typedef enum{Insert,Delete,Edit,Show,Idle} copeoState;
 // declaracion de estado de la agenda
 copeoState currentState;
 
+PFObject *currentObject;
 
 
 @interface Defaults : NSObject
